@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: boethos-upload
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: API_KEY
+        generateValue: true   # Render auto-generates a random secret
+    disk:
+      name: boethos-runs
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1
